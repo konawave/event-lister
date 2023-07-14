@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const sequelize = require('../../config/connection');
 
-class Friday extends Model {}
+class Saturday extends Model {}
 
-Friday.init(
+Saturday.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -28,8 +28,8 @@ Friday.init(
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'Friday',
+    modelName: 'saturday',
   }
 );
 
-module.exports = Friday;
+module.exports = Saturday;

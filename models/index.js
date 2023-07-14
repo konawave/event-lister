@@ -1,8 +1,7 @@
 const User = require('./User');
-const Gallery = require('./Gallery');
-const Painting = require('./Painting');
+const Events = require('./Events');
 
-Gallery.hasMany(Painting, {
+User.hasMany(Painting, {
   foreignKey: 'gallery_id',
 });
 

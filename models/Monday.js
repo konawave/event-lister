@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Users extends Model {}
+class Monday extends Model {}
 
-Users.init(
+Monday.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -15,26 +15,21 @@ Users.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-  },
-  {
-    sequelize,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'users',
-  },
-  {
-    hooks: {
-      async beforeCreate(newUserData) {
-        newUserData.password = await bcrypt.hash(newUserData.password, 10);
-        return newUserData;
-      },
+    starting_time: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
+    ending_time: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+  },
+  {
     sequelize,
-    timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'users',
+    modelName: 'monday',
   }
 );
 
-module.exports = Users;
+module.exports = Monday;

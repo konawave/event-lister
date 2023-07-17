@@ -19,3 +19,4 @@
     * Directed to schedule handlebars views.
         * Schedule populated by events database.
             * database uses models/seeds/db folders to generate, populate, and update values.
+            * This will be done by colecting data thru routes, then passing it to the handlebars template for use. 

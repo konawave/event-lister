@@ -15,18 +15,18 @@ Events.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    starting_time: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    ending_time: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    date: {
+    starting_date: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: false,
     },
+    ending_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    day: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    }
   },
   {
     sequelize,

@@ -19,3 +19,18 @@
     * Directed to schedule handlebars views.
         * Schedule populated by events database.
             * database uses models/seeds/db folders to generate, populate, and update values.
+
+-----------------------------------------------------------------------------------------------
+##  Brandon's stupid questions
+
+* Model User.js has a 
+
+class User extends Model {
+  checkPassword(loginPw) {
+    return bcrypt.compareSync(loginPw, this.password);
+  }
+}
+
+where do we want in in ours.....also password is set in the login.js file so we are setting it in login.js as well?
+
+* the example we used has the identifier as Email.....would you like us to change it?

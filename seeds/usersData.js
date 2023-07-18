@@ -17,4 +17,4 @@ const usersdata = [
 
 const seedUsers = () => Users.bulkCreate(usersdata);
 
-module.exports(seedUsers);
+module.exports = seedUsers();

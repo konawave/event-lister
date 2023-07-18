@@ -2,7 +2,7 @@
 const router = require('express').Router();
 const { Users, Events } = require('../../models');
 const [ Op ] = require("sequelize")
-const { startOfToday, endOfDay, addDays } = require("date-fns")
+const { startOfToday, endOfDay, addDays, format } = require("date-fns")
 
 // CREATE new user
 router.post('/', async (req, res) => {
@@ -94,48 +94,40 @@ router.route("/calendar", async (req, res) => {
                 }
             }
         })
-        // Make an array of the 7 dates in object form
-        // {
-            // date: Date,
-            // dayOfWeek: dayofweek,
-            // events: [array of events]
-        // }
+        // Array of objects for each day of the week. 
         const dates = [
-            // weekdays = [sunday, monday, tuesday, wednesday, thursday, friday, saturday];
         {
-            date: today,
-            // getDay(2023, 7, 25)
-            // Mon Oct 6 2014 00:00:00
+            date: format(startOfToday(), 'yyyy-MM-dd'),
             dayofweek: today[0],
             events: []
         },
         {
-            date: startOfToday(addDays(new Date(), 1)),
+            date: format(startOfToday(addDays(new Date(), 1)), 'yyyy-MM-dd'),
             dayOfWeek: dayofweek,
             events: []
         },
         {
-            date: startOfToday(addDays(new Date(), 2)),
+            date: format(startOfToday(addDays(new Date(), 2)), 'yyyy-MM-dd'),
             dayOfWeek: dayofweek,
             events: []
         },
         {
-            date: startOfToday(addDays(new Date(), 3)),
+            date: format(startOfToday(addDays(new Date(), 3)), 'yyyy-MM-dd'),
             dayOfWeek: dayofweek,
             events: []
         },
         {
-            date: startOfToday(addDays(new Date(), 4)),
+            date: format(startOfToday(addDays(new Date(), 4)), 'yyyy-MM-dd'),
             dayOfWeek: dayofweek,
             events: []
         },
         {
-            date: startOfToday(addDays(new Date(), 5)),
+            date: format(startOfToday(addDays(new Date(), 5)), 'yyyy-MM-dd'),
             dayOfWeek: dayofweek,
             events: []
         },
         {
-            date: startOfToday(addDays(new Date(), 6)),
+            date: format(startOfToday(addDays(new Date(), 6)), 'yyyy-MM-dd'),
             dayOfWeek: dayofweek,
             events: []
         },

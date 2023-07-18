@@ -38,21 +38,3 @@ app.use(routes);
 sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => console.log('Now listening'));
 });
-
-// post route to get the input of the form from home-routes.js
-app.post('/submit', async (req, res) => {
-    try {
-      const { eventName, date } = req.body; // Assuming you've set the appropriate name attributes on the input fields
-  
-      // Create a new record in the database using Sequelize
-      await events.create({
-        eventName,
-        date,
-      });
-  
-      res.redirect('/success'); // Redirect to a success page after successful submission
-    } catch (error) {
-      console.error(error);
-      res.redirect('/error'); // Redirect to an error page if an error occurs
-    }
-  });

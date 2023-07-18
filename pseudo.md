@@ -19,7 +19,6 @@
     * Directed to schedule handlebars views.
         * Schedule populated by events database.
             * database uses models/seeds/db folders to generate, populate, and update values.
-<<<<<<< HEAD
 
 -----------------------------------------------------------------------------------------------
 ##  Brandon's stupid questions
@@ -35,6 +34,7 @@ class User extends Model {
 where do we want in in ours.....also password is set in the login.js file so we are setting it in login.js as well?
 
 * the example we used has the identifier as Email.....would you like us to change it?
-=======
-            * This will be done by colecting data thru routes, then passing it to the handlebars template for use. 
->>>>>>> 166e6cb3d9760e8a88182216846078e19d9308b7
+
+
+* HTML Routes to render views
+* polishing seeds/models

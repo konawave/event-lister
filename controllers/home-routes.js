@@ -23,6 +23,23 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.post('/submit', async (req, res) => {
+    try {
+      const { eventName, date } = req.body; // Assuming you've set the appropriate name attributes on the input fields
+  
+      // Create a new record in the database using Sequelize
+      await Events.create({
+        eventName,
+        date,
+      });
+  
+      res.redirect('/success'); // Redirect to a success page after successful submission
+    } catch (error) {
+      console.error(error);
+      res.redirect('/error'); // Redirect to an error page if an error occurs
+    }
+  });
+
 // Login
 router.post('/login', async (req, res) => {
     try {
@@ -137,7 +154,7 @@ router.route("/calendar", async (req, res) => {
             const dateToPushTo = dates.find(date => date.date === plainObj.date)
             dateToPushTo.events.push(plainObj)
         })
-        res.render("schedule", { dates })
+        res.render("schedule", { dates:dates })
         }
         // 
 

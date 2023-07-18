@@ -12,7 +12,7 @@ Events.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    eventName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -20,14 +20,6 @@ Events.init(
       type: DataTypes.DATEONLY,
       allowNull: false,
     },
-    // ending_date: {
-    //   type: DataTypes.DATE,
-    //   allowNull: false,
-    // },
-    // day: {
-    //   type: DataTypes.STRING,
-    //   allowNull: false,
-    // }
   },
   {
     sequelize,

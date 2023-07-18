@@ -1,7 +1,7 @@
 
 const router = require('express').Router();
-const { Users, Events } = require('../../models');
-const [ Op ] = require("sequelize")
+const { Users, Events } = require('../models');
+const Op = require("sequelize")
 const { startOfToday, endOfDay, addDays, format } = require("date-fns")
 
 // CREATE new user

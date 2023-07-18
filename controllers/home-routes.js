@@ -28,14 +28,14 @@ router.post('/login', async (req, res) => {
     try {
         const calUserData = await user.findOne({
             where: {
-                username: req.body.username
+                username: req.body.username,
             },
         });
 
         if (!calUserData) {
             res
                 .status(400)
-                .json({ message: 'Incorrect username or password. Please try again!' });
+                .json({ message: 'Incorrect Username or password. Please try again!' });
             return;
         }
 

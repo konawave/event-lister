@@ -1,6 +1,8 @@
 
 const router = require('express').Router();
-// const { user } = require('../../models');
+const { Users, Events } = require('../models');
+const Op = require("sequelize")
+const { startOfToday, endOfDay, addDays, format } = require("date-fns")
 
 // CREATE new user
 router.post('/', async (req, res) => {
@@ -69,5 +71,79 @@ router.post('/logout', (req, res) => {
         res.status(404).end();
     }
 });
+
+// User's page
+// router.get('/user/:userId', async (req, res) => {
+//     // Get the user and associated events
+//     const user = await Users.findOne({
+//         where: {
+//             id: req.params.userId
+//         },
+//         include: [Events]
+//     })
+
+// })
+router.route("/calendar", async (req, res) => {
+    try {
+        const today = startOfToday();
+        const endDay = endOfDay(addDays(new Date(), 6));
+        const events = await Events.findAll({
+            where: {
+                date: {
+                    [Op.between]: [today, endDay]
+                }
+            }
+        })
+        // Array of objects for each day of the week. 
+        const dates = [
+        {
+            date: format(startOfToday(), 'yyyy-MM-dd'),
+            dayofweek: today[0],
+            events: []
+        },
+        {
+            date: format(startOfToday(addDays(new Date(), 1)), 'yyyy-MM-dd'),
+            dayOfWeek: dayofweek,
+            events: []
+        },
+        {
+            date: format(startOfToday(addDays(new Date(), 2)), 'yyyy-MM-dd'),
+            dayOfWeek: dayofweek,
+            events: []
+        },
+        {
+            date: format(startOfToday(addDays(new Date(), 3)), 'yyyy-MM-dd'),
+            dayOfWeek: dayofweek,
+            events: []
+        },
+        {
+            date: format(startOfToday(addDays(new Date(), 4)), 'yyyy-MM-dd'),
+            dayOfWeek: dayofweek,
+            events: []
+        },
+        {
+            date: format(startOfToday(addDays(new Date(), 5)), 'yyyy-MM-dd'),
+            dayOfWeek: dayofweek,
+            events: []
+        },
+        {
+            date: format(startOfToday(addDays(new Date(), 6)), 'yyyy-MM-dd'),
+            dayOfWeek: dayofweek,
+            events: []
+        },
+    ]
+        events.forEach(obj => {
+            const plainObj = obj.toJSON()
+            const dateToPushTo = dates.find(date => date.date === plainObj.date)
+            dateToPushTo.events.push(plainObj)
+        })
+        res.render("schedule", { dates })
+        }
+        // 
+
+    catch (e) {
+        res.status(500).json(e)
+    }
+})
 
 module.exports = router;

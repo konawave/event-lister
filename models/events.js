@@ -32,7 +32,7 @@ Events.init(
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'Events',
+    modelName: 'events',
   }
 );
 

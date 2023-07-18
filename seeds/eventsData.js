@@ -29,4 +29,4 @@ const eventsdata = [
 
 const seedEvents = () => Events.bulkCreate(eventsdata);
 
-module.exports(seedEvents);
+module.exports = seedEvents();

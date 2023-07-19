@@ -1,4 +1,5 @@
-
+router.get('/schedule', async (req, res) => {
+    
 const router = require('express').Router();
 const { Users, Events } = require('../models');
 const Op = require("sequelize")
@@ -121,38 +122,52 @@ router.post('/logout', (req, res) => {
 
 // })
 router.get('/schedule', async (req, res) => {
-  try {
-    const today = startOfToday();
-    const endDay = endOfDay(addDays(new Date(), 6));
-    const events = await Events.findAll({
-      where: {
-        date: {
-          [Op.between]: [today, endDay]
+    try {
+      const today = startOfToday();
+      const endDay = endOfDay(addDays(new Date(), 6));
+      const events = await Events.findAll({
+        where: {
+          date: {
+            [Op.between]: [today, endDay]
+          }
         }
-      }
-    });
+      });
+  
+      // Create an array of objects for each day of the week.
+      const dates = [
+        { date: format(startOfToday(), 'yyyy-MM-dd'), events: [] },
+        { date: format(startOfToday(addDays(new Date(), 1)), 'yyyy-MM-dd'), events: [] },
+        { date: format(startOfToday(addDays(new Date(), 2)), 'yyyy-MM-dd'), events: [] },
+        { date: format(startOfToday(addDays(new Date(), 3)), 'yyyy-MM-dd'), events: [] },
+        { date: format(startOfToday(addDays(new Date(), 4)), 'yyyy-MM-dd'), events: [] },
+        { date: format(startOfToday(addDays(new Date(), 5)), 'yyyy-MM-dd'), events: [] },
+        { date: format(startOfToday(addDays(new Date(), 6)), 'yyyy-MM-dd'), events: [] },
+//         const currentDate = new Date();
+//         const nextDay = addDays(currentDate, 1);
 
-    // Create an array of objects for each day of the week.
-    const dates = [];
-    for (let i = 0; i < 7; i++) {
-      const currentDate = addDays(today, i);
-      const formattedDate = format(currentDate, 'yyyy-MM-dd');
-      dates.push({ date: formattedDate, events: [] });
+// const dates = [
+//   { date: startOfToday(currentDate), events: [] },
+//   { date: startOfToday(nextDay), events: [] },
+// //   { date: startOfToday(addDays(currentDate, 2)), events: [] },
+//   { date: startOfToday(addDays(currentDate, 3)), events: [] },
+//   { date: startOfToday(addDays(currentDate, 4)), events: [] },
+//   { date: startOfToday(addDays(currentDate, 5)), events: [] },
+//   { date: startOfToday(addDays(currentDate, 6)), events: [] },
+];
+      // Push events to their respective day in the 'dates' array.
+      events.forEach(obj => {
+        const plainObj = obj.toJSON();
+        const dateToPushTo = dates.find(date => date.date === plainObj.date);
+        dateToPushTo.events.push(plainObj);
+      });
+  
+      // Pass the 'dates' array to the 'schedule' view when rendering
+      res.render('schedule', { dates });
+      console.log(startOfToday(addDays(new Date(), 2)));
+    } catch (err) {
+      console.log(err, "Error directing to schedule");
+      res.status(500).json(err);
     }
-
-    events.forEach(obj => {
-      const plainObj = obj.toJSON();
-      const dateToPushTo = dates.find(date => date.date === plainObj.date);
-      dateToPushTo.events.push(plainObj);
-    });
-
-    // Pass the 'dates' array to the 'schedule' view when rendering
-    res.render('schedule', { dates });
-  } catch (err) {
-    console.log(err, "Error directing to schedule");
-    res.status(500).json(err);
-  }
-});
-
+  })});
 
 module.exports = router;

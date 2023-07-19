@@ -11,23 +11,16 @@
   <button type="submit">Submit</button>
   </form>
   </div>
-  {{#each dates as |date|}}
+  {{#each dates }}
     <div class="date col-md-5">
       <p>
-        {{date.date}}
+        {{this.date}}
       </p>
-      
-        {{#each dates.events as |event|}}
+        {{#each events}}
       <p> 
-        {{date.event}}
+        {{eventName}} {{id}}
       </p>
         {{/each}}
     </div>
-    <div class="col-md-7">
-      <p>
-        <!-- guest_name will eventually go here -->
-      </p>
-    </div>
-    <!-- Below, we close the #each helper. -->
   {{/each}}
 </div>

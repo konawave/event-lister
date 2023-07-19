@@ -39,3 +39,9 @@ where do we want in in ours.....also password is set in the login.js file so we 
 * HTML Routes to render views
 * polishing seeds/models
 * git mv -f models/Events.js models/events.js
+
+* Nick's worklist
+    * Cleaning up seeds
+    * HTML Routes
+    * Handlebars
+    * CSS for Handlebars?

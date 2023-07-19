@@ -4,9 +4,29 @@ const { Users, Events } = require('../models');
 const Op = require("sequelize")
 const { startOfToday, endOfDay, addDays, format } = require("date-fns")
 
-router.get('/test', async (req, res) => {
+router.get('/homepage', async (req, res) => {
     try {
       res.render('homepage');
+      console.log('Success!');
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  });
+
+  router.get('/login', async (req, res) => {
+    try {
+      res.render('login');
+      console.log('Success!');
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  });
+
+  router.get('/schedule', async (req, res) => {
+    try {
+      res.render('schedule');
       console.log('Success!');
     } catch (err) {
       console.log(err);

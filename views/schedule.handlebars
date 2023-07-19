@@ -4,6 +4,13 @@
       &#127869 This Week
     </h2>
   </div>
+  <div>
+    <form action="/submit" method="POST">
+  <input type="text" name={{eventName}} id="{{id}}_text" value="{{value_text}}" />
+  <input type="date" name="{{date}}" id="{{id}}" value="{{value_date}}" />
+  <button type="submit">Submit</button>
+  </form>
+  </div>
   {{#each dates as |date|}}
     <div class="date col-md-5">
       <p>

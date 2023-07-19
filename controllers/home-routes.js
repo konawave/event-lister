@@ -4,6 +4,16 @@ const { Users, Events } = require('../models');
 const Op = require("sequelize")
 const { startOfToday, endOfDay, addDays, format } = require("date-fns")
 
+router.get('/test', async (req, res) => {
+    try {
+      res.render('homepage');
+      console.log('Success!');
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  });
+
 // CREATE new user
 router.post('/', async (req, res) => {
     try {

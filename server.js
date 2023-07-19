@@ -38,6 +38,7 @@ app.use(routes);
 sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => console.log('Now listening'));
 });
+<<<<<<< HEAD
 
 // post route to get the input of the form from home-routes.js
 app.post('/submit', async (req, res) => {
@@ -56,3 +57,5 @@ app.post('/submit', async (req, res) => {
       res.redirect('/error'); // Redirect to an error page if an error occurs
     }
   });
+=======
+>>>>>>> f93601f64b04ed89fec12ed48862e2a20f2563e6

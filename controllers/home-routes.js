@@ -109,17 +109,8 @@ router.post('/logout', (req, res) => {
     }
 });
 
-// User's page
-// router.get('/user/:userId', async (req, res) => {
-//     // Get the user and associated events
-//     const user = await Users.findOne({
-//         where: {
-//             id: req.params.userId
-//         },
-//         include: [Events]
-//     })
+// ...
 
-// })
 router.get('/schedule', async (req, res) => {
   try {
     const today = startOfToday();
@@ -132,19 +123,19 @@ router.get('/schedule', async (req, res) => {
       }
     });
 
-    // Create an array of objects for each day of the week.
     const dates = [];
     for (let i = 0; i < 7; i++) {
-      const currentDate = addDays(today, i);
-      const formattedDate = format(currentDate, 'yyyy-MM-dd');
+      const formattedDate = format(addDays(today, i), 'yyyy-MM-dd');
       dates.push({ date: formattedDate, events: [] });
     }
-
-    events.forEach(obj => {
+    
+    // This loop is checing to see the dates from the foor loop above. If the event matches the date, then it should push the event to the date's events property. At the moment, events are only pushed if they match "today."
+    for (let i = 0; i < events.length; i++) {
+      const obj = events[i];
       const plainObj = obj.toJSON();
       const dateToPushTo = dates.find(date => date.date === plainObj.date);
       dateToPushTo.events.push(plainObj);
-    });
+    }
 
     // Pass the 'dates' array to the 'schedule' view when rendering
     res.render('schedule', { dates });
@@ -153,6 +144,9 @@ router.get('/schedule', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+// ...
+
 
 
 module.exports = router;

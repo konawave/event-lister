@@ -6,21 +6,26 @@
   </div>
   <div>
     <form action="/submit" method="POST">
-  <input type="text" name={{eventName}} id="{{id}}_text" value="{{value_text}}" />
-  <input type="date" name="{{date}}" id="{{id}}" value="{{value_date}}" />
-  <button type="submit">Submit</button>
-  </form>
+      <input type="text" name={{eventName}} id={{id}}_text value={{value_text}} />
+      <input type=date name={{date}} id={{id}} value={{value_date}} />
+      <button type="submit">Submit</button>
+    </form>
   </div>
   {{#each dates }}
     <div class="date col-md-5">
       <p>
         {{this.date}}
+        {{#if events.length}}
+          {{#each events}}
+            <p> 
+              {{eventName}} {{id}}
+            </p>
+          {{/each}}
+        {{else}}
+          <p>No events planned for today</p>
+        {{/if}}
       </p>
-        {{#each events}}
-      <p> 
-        {{eventName}} {{id}}
-      </p>
-        {{/each}}
     </div>
   {{/each}}
 </div>
+

@@ -7,7 +7,7 @@ const eventsdata = [
     },
     {
         eventName: "Ben",
-        date: "2023-07-20",
+        date: "2023-07-19",
     },
     {
         eventName: "Brandon",
@@ -15,7 +15,7 @@ const eventsdata = [
     },
     {
         eventName: "Nicco",
-        date: "2023-07-21",
+        date: "2023-07-24",
     }
 ];
 

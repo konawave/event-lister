@@ -109,6 +109,17 @@ router.post('/logout', (req, res) => {
     }
 });
 
+// User's page
+// router.get('/user/:userId', async (req, res) => {
+//     // Get the user and associated events
+//     const user = await Users.findOne({
+//         where: {
+//             id: req.params.userId
+//         },
+//         include: [Events]
+//     })
+
+// })
 router.get('/schedule', async (req, res) => {
   try {
     const today = startOfToday();
@@ -121,8 +132,6 @@ router.get('/schedule', async (req, res) => {
       },
     });
 
-    console.log('Time Zone of Today:', today.getTimezoneOffset());
-
     const dates = [];
     for (let i = 0; i < 7; i++) {
       const currentDate = addDays(today, i);
@@ -130,18 +139,11 @@ router.get('/schedule', async (req, res) => {
       dates.push({ date: formattedDate, events: [] });
     }
 
-    for (const event of events) {
-      const plainObj = event.toJSON();
-      const eventDateUTC = parseISO(plainObj.date); // Parse the event date string to a Date object in UTC
-      const timeZone = 'your_time_zone_here'; // Replace 'your_time_zone_here' with your server's time zone (e.g., 'America/New_York')
-      const eventDateLocal = utcToZonedTime(eventDateUTC, timeZone); // Convert to server's local time
-      const dateToPushTo = dates.find(
-        (date) => date.date === format(eventDateLocal, 'yyyy-MM-dd')
-      );
-      if (dateToPushTo) {
-        dateToPushTo.events.push(plainObj);
-      }
-    }
+    events.forEach(obj => {
+      const plainObj = obj.toJSON();
+      const dateToPushTo = dates.find(date => date.date === plainObj.date);
+      dateToPushTo.events.push(plainObj);
+    });
 
     res.render('schedule', { dates });
   } catch (err) {
@@ -150,8 +152,5 @@ router.get('/schedule', async (req, res) => {
   }
 });
 
-// ...
-
-// ... (other routes)
 
 module.exports = router;

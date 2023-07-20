@@ -1,8 +1,7 @@
-
 const router = require('express').Router();
 const { Users, Events } = require('../models');
-const Op = require("sequelize")
-const { startOfToday, endOfDay, addDays, format, parseISO, addMinutes } = require("date-fns");
+const { Op } = require("sequelize");
+const { startOfToday, endOfDay, addDays, format } = require("date-fns");
 
 router.get('/homepage', async (req, res) => {
     try {
@@ -27,7 +26,7 @@ router.get('/homepage', async (req, res) => {
 // CREATE new user
 router.post('/', async (req, res) => {
     try {
-        const calUserData = await user.create({
+        const calUserData = await Users.create({
             username: req.body.username,
             password: req.body.password,
         });
@@ -63,7 +62,7 @@ router.post('/submit', async (req, res) => {
 // Login
 router.post('/login', async (req, res) => {
     try {
-        const calUserData = await user.findOne({
+        const calUserData = await Users.findOne({
             where: {
                 username: req.body.username,
             },
@@ -121,15 +120,13 @@ router.get('/schedule', async (req, res) => {
       },
     });
 
-    console.log(today, endDay);
-
     const dates = [];
     for (let i = 0; i < 7; i++) {
       const currentDate = addDays(today, i);
       const formattedDate = format(currentDate, 'yyyy-MM-dd');
       dates.push({ date: formattedDate, events: [] });
     }
-
+    
     if (events && events.length > 0) {
       events.forEach((obj) => {
         const plainObj = obj.toJSON();
@@ -139,7 +136,7 @@ router.get('/schedule', async (req, res) => {
         }
       });
     }
-
+    console.log(events);
     res.render('schedule', { dates });
   } catch (err) {
     console.log(err, 'Error directing to schedule');

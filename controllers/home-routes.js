@@ -2,7 +2,7 @@
 const router = require('express').Router();
 const { Users, Events } = require('../models');
 const Op = require("sequelize")
-const { startOfToday, endOfDay, addDays, format } = require("date-fns");
+const { startOfToday, endOfDay, addDays, format, parseISO, addMinutes } = require("date-fns");
 
 router.get('/homepage', async (req, res) => {
     try {
@@ -109,44 +109,49 @@ router.post('/logout', (req, res) => {
     }
 });
 
-// ...
-
 router.get('/schedule', async (req, res) => {
   try {
     const today = startOfToday();
-    const endDay = endOfDay(addDays(new Date(), 6));
+    const endDay = endOfDay(addDays(today, 6));
     const events = await Events.findAll({
       where: {
         date: {
-          [Op.between]: [today, endDay]
-        }
-      }
+          [Op.between]: [today, endDay],
+        },
+      },
     });
+
+    console.log('Time Zone of Today:', today.getTimezoneOffset());
 
     const dates = [];
     for (let i = 0; i < 7; i++) {
-      const formattedDate = format(addDays(today, i), 'yyyy-MM-dd');
+      const currentDate = addDays(today, i);
+      const formattedDate = format(currentDate, 'yyyy-MM-dd');
       dates.push({ date: formattedDate, events: [] });
     }
-    
-    // This loop is checing to see the dates from the foor loop above. If the event matches the date, then it should push the event to the date's events property. At the moment, events are only pushed if they match "today."
-    for (let i = 0; i < events.length; i++) {
-      const obj = events[i];
-      const plainObj = obj.toJSON();
-      const dateToPushTo = dates.find(date => date.date === plainObj.date);
-      dateToPushTo.events.push(plainObj);
+
+    for (const event of events) {
+      const plainObj = event.toJSON();
+      const eventDateUTC = parseISO(plainObj.date); // Parse the event date string to a Date object in UTC
+      const timeZone = 'your_time_zone_here'; // Replace 'your_time_zone_here' with your server's time zone (e.g., 'America/New_York')
+      const eventDateLocal = utcToZonedTime(eventDateUTC, timeZone); // Convert to server's local time
+      const dateToPushTo = dates.find(
+        (date) => date.date === format(eventDateLocal, 'yyyy-MM-dd')
+      );
+      if (dateToPushTo) {
+        dateToPushTo.events.push(plainObj);
+      }
     }
 
-    // Pass the 'dates' array to the 'schedule' view when rendering
     res.render('schedule', { dates });
   } catch (err) {
-    console.log(err, "Error directing to schedule");
+    console.log(err, 'Error directing to schedule');
     res.status(500).json(err);
   }
 });
 
 // ...
 
-
+// ... (other routes)
 
 module.exports = router;

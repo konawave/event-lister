@@ -3,30 +3,28 @@ const { Events } = require('../models');
 const eventsdata = [
     {
         name: "Nick",
-        starting_date: "July 25, 2023 05:00:00",
-        ending_date: "July 25, 2023 06:00:00",
-        day: "tuesday",
+        eventName: "Soccer Practice",
+        date: "2023-07-20",
     },
     {
         name: "Ben",
-        starting_date: "July 25, 2023 07:00:00",
-        ending_date: "July 25, 2023 08:00:00",
-        day: "tuesday",
+        eventName: "Tuba lessons",
+        date: "2023-07-20",
     },
     {
         name: "Brandon",
-        starting_date: "July 25, 2023 09:00:00",
-        ending_date: "June 25, 2023 10:00:00",
-        day: "tuesday",
+        eventName: "AC/DC Concert",
+        date: "2023-07-22",
     },
     {
         name: "Nicco",
-        starting_date: "July 25, 2023 11:00:00",
-        ending_date: "July 25, 2023 12:00:00",
-        day: "tuesday",
+        eventName: "Star Wars Movie Premiere",
+        date: "2023-07-21",
     }
 ];
 
 const seedEvents = () => Events.bulkCreate(eventsdata);
 
-module.exports = seedEvents();
+module.exports = {
+    seedEvents
+}

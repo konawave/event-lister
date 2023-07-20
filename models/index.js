@@ -1,12 +1,10 @@
 const Users = require('./users');
 const Events = require('./events');
 
-Users.hasMany(Events, {
-  foreignKey: 'id',
-});
+Users.hasMany(Events);
 
 Events.belongsTo(Users, {
-  foreignKey: 'id',
+  foreignKey: 'user_id',
 });
 
 module.exports = { Users, Events };

@@ -1,6 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
-const { startOfToday, endOfDay, addDays } = require("date-fns")
 
 class Events extends Model {}
 
@@ -11,6 +10,11 @@ Events.init(
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      
     },
     eventName: {
       type: DataTypes.STRING,

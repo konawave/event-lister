@@ -1,3 +1,11 @@
+.date.col-md-5 {
+  border: 5px solid black;
+}
+
+.eventCard {
+  border: 2px solid blue;
+}
+
 .chart {
     width: 100%;
     border-collapse: collapse;

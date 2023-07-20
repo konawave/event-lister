@@ -1,15 +1,14 @@
-
 const router = require('express').Router();
 const { Users, Events } = require('../models');
-const Op = require("sequelize")
-const { startOfToday, endOfDay, addDays, format } = require("date-fns")
+const { Op } = require("sequelize");
+const { startOfToday, endOfDay, addDays, format } = require("date-fns");
 
 router.get('/homepage', async (req, res) => {
     try {
       res.render('homepage');
-      console.log('Success!');
+      console.log('Success directing to homepage!');
     } catch (err) {
-      console.log(err);
+      console.log(err, "Error directing to homepage");
       res.status(500).json(err);
     }
   });
@@ -17,19 +16,9 @@ router.get('/homepage', async (req, res) => {
   router.get('/login', async (req, res) => {
     try {
       res.render('login');
-      console.log('Success!');
+      console.log('Success directing to login!');
     } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
-    }
-  });
-
-  router.get('/schedule', async (req, res) => {
-    try {
-      res.render('schedule');
-      console.log('Success!');
-    } catch (err) {
-      console.log(err);
+      console.log(err, 'Error directing to login');
       res.status(500).json(err);
     }
   });
@@ -37,7 +26,7 @@ router.get('/homepage', async (req, res) => {
 // CREATE new user
 router.post('/', async (req, res) => {
     try {
-        const calUserData = await user.create({
+        const calUserData = await Users.create({
             username: req.body.username,
             password: req.body.password,
         });
@@ -73,7 +62,7 @@ router.post('/submit', async (req, res) => {
 // Login
 router.post('/login', async (req, res) => {
     try {
-        const calUserData = await user.findOne({
+        const calUserData = await Users.findOne({
             where: {
                 username: req.body.username,
             },
@@ -119,78 +108,42 @@ router.post('/logout', (req, res) => {
     }
 });
 
-// User's page
-// router.get('/user/:userId', async (req, res) => {
-//     // Get the user and associated events
-//     const user = await Users.findOne({
-//         where: {
-//             id: req.params.userId
-//         },
-//         include: [Events]
-//     })
+router.get('/schedule', async (req, res) => {
+  try {
+    const today = startOfToday();
+    const endDay = endOfDay(addDays(today, 6));
+    const events = await Events.findAll({
+      where: {
+        date: {
+          [Op.between]: [today, endDay],
+        },
+      },
+    });
 
-// })
-router.route("/calendar", async (req, res) => {
-    try {
-        const today = startOfToday();
-        const endDay = endOfDay(addDays(new Date(), 6));
-        const events = await Events.findAll({
-            where: {
-                date: {
-                    [Op.between]: [today, endDay]
-                }
-            }
-        })
-        // Array of objects for each day of the week. 
-        const dates = [
-        {
-            date: format(startOfToday(), 'yyyy-MM-dd'),
-            dayofweek: today[0],
-            events: []
-        },
-        {
-            date: format(startOfToday(addDays(new Date(), 1)), 'yyyy-MM-dd'),
-            dayOfWeek: dayofweek,
-            events: []
-        },
-        {
-            date: format(startOfToday(addDays(new Date(), 2)), 'yyyy-MM-dd'),
-            dayOfWeek: dayofweek,
-            events: []
-        },
-        {
-            date: format(startOfToday(addDays(new Date(), 3)), 'yyyy-MM-dd'),
-            dayOfWeek: dayofweek,
-            events: []
-        },
-        {
-            date: format(startOfToday(addDays(new Date(), 4)), 'yyyy-MM-dd'),
-            dayOfWeek: dayofweek,
-            events: []
-        },
-        {
-            date: format(startOfToday(addDays(new Date(), 5)), 'yyyy-MM-dd'),
-            dayOfWeek: dayofweek,
-            events: []
-        },
-        {
-            date: format(startOfToday(addDays(new Date(), 6)), 'yyyy-MM-dd'),
-            dayOfWeek: dayofweek,
-            events: []
-        },
-    ]
-        events.forEach(obj => {
-            const plainObj = obj.toJSON()
-            const dateToPushTo = dates.find(date => date.date === plainObj.date)
-            dateToPushTo.events.push(plainObj)
-        })
-        res.render("schedule", { dates:dates })
-        }
-        // 
-
-    catch (e) {
-        res.status(500).json(e)
+    const dates = [];
+    for (let i = 0; i < 7; i++) {
+      const currentDate = addDays(today, i);
+      const formattedDate = format(currentDate, 'yyyy-MM-dd');
+      dates.push({ date: formattedDate, events: [] });
     }
-})
+    
+    if (events && events.length > 0) {
+      events.forEach((obj) => {
+        const plainObj = obj.toJSON();
+        const dateToPushTo = dates.find((date) => date.date === plainObj.date);
+        if (dateToPushTo) {
+          dateToPushTo.events.push(plainObj);
+        }
+      });
+    }
+    console.log(events);
+    res.render('schedule', { dates }, );
+  } catch (err) {
+    console.log(err, 'Error directing to schedule');
+    res.status(500).json(err);
+  }
+});
+
+// ...
 
 module.exports = router;

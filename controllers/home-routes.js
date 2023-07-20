@@ -109,17 +109,6 @@ router.post('/logout', (req, res) => {
     }
 });
 
-// User's page
-// router.get('/user/:userId', async (req, res) => {
-//     // Get the user and associated events
-//     const user = await Users.findOne({
-//         where: {
-//             id: req.params.userId
-//         },
-//         include: [Events]
-//     })
-
-// })
 router.get('/schedule', async (req, res) => {
   try {
     const today = startOfToday();
@@ -132,6 +121,8 @@ router.get('/schedule', async (req, res) => {
       },
     });
 
+    console.log(today, endDay);
+
     const dates = [];
     for (let i = 0; i < 7; i++) {
       const currentDate = addDays(today, i);
@@ -139,11 +130,15 @@ router.get('/schedule', async (req, res) => {
       dates.push({ date: formattedDate, events: [] });
     }
 
-    events.forEach(obj => {
-      const plainObj = obj.toJSON();
-      const dateToPushTo = dates.find(date => date.date === plainObj.date);
-      dateToPushTo.events.push(plainObj);
-    });
+    if (events && events.length > 0) {
+      events.forEach((obj) => {
+        const plainObj = obj.toJSON();
+        const dateToPushTo = dates.find((date) => date.date === plainObj.date);
+        if (dateToPushTo) {
+          dateToPushTo.events.push(plainObj);
+        }
+      });
+    }
 
     res.render('schedule', { dates });
   } catch (err) {
@@ -152,5 +147,6 @@ router.get('/schedule', async (req, res) => {
   }
 });
 
+// ...
 
 module.exports = router;

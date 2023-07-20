@@ -2,19 +2,23 @@ const { Events } = require('../models');
 
 const eventsdata = [
     {
-        eventName: "Nick",
+        name: "Nick",
+        eventName: "Soccer Practice",
         date: "2023-07-20",
     },
     {
-        eventName: "Ben",
+        name: "Ben",
+        eventName: "Tuba lessons",
         date: "2023-07-20",
     },
     {
-        eventName: "Brandon",
+        name: "Brandon",
+        eventName: "AC/DC Concert",
         date: "2023-07-22",
     },
     {
-        eventName: "Nicco",
+        name: "Nicco",
+        eventName: "Star Wars Movie Premiere",
         date: "2023-07-21",
     }
 ];

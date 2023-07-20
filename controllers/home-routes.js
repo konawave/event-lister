@@ -137,7 +137,7 @@ router.get('/schedule', async (req, res) => {
       });
     }
     console.log(events);
-    res.render('schedule', { dates });
+    res.render('schedule', { dates }, );
   } catch (err) {
     console.log(err, 'Error directing to schedule');
     res.status(500).json(err);

@@ -6,28 +6,26 @@
   </div>
   <div>
     <form action="/submit" method="POST">
-  <input type="text" name={{eventName}} id="{{id}}_text" value="{{value_text}}" />
-  <input type="date" name="{{date}}" id="{{id}}" value="{{value_date}}" />
-  <button type="submit">Submit</button>
-  </form>
+      <input type="text" name={{eventName}} id="{{id}}_text" value="{{value_text}}" />
+      <input type="date" name="{{date}}" id="{{id}}" value="{{value_date}}" />
+      <button type="submit">Submit</button>
+    </form>
   </div>
-  {{#each dates as |date|}}
+  {{#each dates }}
     <div class="date col-md-5">
       <p>
-        {{date.date}}
+        {{this.date}}
       </p>
-      
-        {{#each dates.events as |event|}}
-      <p> 
-        {{date.event}}
-      </p>
+      {{#if events.length}}
+        {{#each events}}
+          <p class="eventCard">
+            <p>{{name}}</p>
+            {{eventName}}
+          </p>
         {{/each}}
+      {{else}}
+        <p>No events today</p>
+      {{/if}}
     </div>
-    <div class="col-md-7">
-      <p>
-        <!-- guest_name will eventually go here -->
-      </p>
-    </div>
-    <!-- Below, we close the #each helper. -->
   {{/each}}
 </div>

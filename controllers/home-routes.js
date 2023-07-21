@@ -52,10 +52,10 @@ router.post('/submit', async (req, res) => {
         date,
       });
   
-      res.redirect('/success'); // Redirect to a success page after successful submission
+       res.redirect('/users/schedule')// Redirect to a success page after successful submission
     } catch (error) {
       console.error(error);
-      res.redirect('/error'); // Redirect to an error page if an error occurs
+      res.redirect('/users/login')// Redirect to an error page if an error occurs
     }
   });
 
@@ -110,6 +110,7 @@ router.post('/logout', (req, res) => {
 
 router.get('/schedule', async (req, res) => {
   try {
+    // This creates an array of all events for the week
     const today = startOfToday();
     const endDay = endOfDay(addDays(today, 6));
     const events = await Events.findAll({
@@ -120,6 +121,7 @@ router.get('/schedule', async (req, res) => {
       },
     });
 
+    // This creates an array of all the dates of the week
     const dates = [];
     for (let i = 0; i < 7; i++) {
       const currentDate = addDays(today, i);
@@ -127,6 +129,7 @@ router.get('/schedule', async (req, res) => {
       dates.push({ date: formattedDate, events: [] });
     }
     
+    // This pushes the relevant events to their respective dates
     if (events && events.length > 0) {
       events.forEach((obj) => {
         const plainObj = obj.toJSON();
@@ -136,7 +139,6 @@ router.get('/schedule', async (req, res) => {
         }
       });
     }
-    console.log(events);
     res.render('schedule', { dates }, );
   } catch (err) {
     console.log(err, 'Error directing to schedule');

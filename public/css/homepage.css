@@ -1,4 +1,4 @@
-.container {
+/* .container {
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
@@ -24,7 +24,15 @@ label {
   font-weight: bold;
 }
 
-input[type="email"],
+input[type="username"],
+input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type="text"],
 input[type="password"] {
   width: 100%;
   padding: 8px;
@@ -45,3 +53,15 @@ button[type="submit"]:hover {
   background-color: #45a049;
 }
 
+ p {
+   margin-top: 20px;
+ }
+
+ a {
+   color: #4caf50;
+   text-decoration: none;
+ }
+
+ a:hover {
+   text-decoration: underline;
+ } */

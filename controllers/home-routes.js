@@ -107,7 +107,11 @@ router.post('/logout', (req, res) => {
         res.status(404).end();
     }
 });
-
+router.get('/signup', async (req, res)=> {
+  try{
+    
+  }
+})
 router.get('/schedule', async (req, res) => {
   try {
     const today = startOfToday();

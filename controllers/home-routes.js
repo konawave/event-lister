@@ -15,7 +15,7 @@ router.get('/homepage', async (req, res) => {
 
   router.get('/login', async (req, res) => {
     try {
-      res.render('login');
+      res.render('schedule');
       console.log('Success directing to login!');
     } catch (err) {
       console.log(err, 'Error directing to login');
@@ -52,7 +52,7 @@ router.post('/submit', async (req, res) => {
         date,
       });
   
-       res.redirect('/users/schedule')// Redirect to a success page after successful submission
+       res.redirect('/schedule')// Redirect to a success page after successful submission
     } catch (error) {
       console.error(error);
       res.redirect('/users/login')// Redirect to an error page if an error occurs
@@ -61,12 +61,14 @@ router.post('/submit', async (req, res) => {
 
 // Login
 router.post('/login', async (req, res) => {
+  console.log(req.body);
     try {
         const calUserData = await Users.findOne({
             where: {
                 username: req.body.username,
             },
         });
+        console.log(calUserData)
 
         if (!calUserData) {
             res
@@ -86,7 +88,7 @@ router.post('/login', async (req, res) => {
 
         req.session.save(() => {
             req.session.loggedIn = true;
-
+            req.session.userId = calUserData.id
             res
                 .status(200)
                 .json({ user: calUserData, message: 'You are now logged in!' });
@@ -107,12 +109,28 @@ router.post('/logout', (req, res) => {
         res.status(404).end();
     }
 });
-router.get('/signup', async (req, res)=> {
-  try{
+// router.get('/signup', async (req, res)=> {
+//   try{
+//     //create a user
+//     if 
+//     }
+//   }
+//   catch {
     
-  }
-})
+//   }
+// });
 router.get('/schedule', async (req, res) => {
+  //check the session
+  // if (!res.session) {
+  //   res.redirect('/homepage')res
+  // }
+console.log(req.session)
+  if (req.session.loggedIn == false || !req.session.userId){
+    res.redirect('/homepage')
+    return
+  }
+  //if not a session send to login page
+ 
   try {
     // This creates an array of all events for the week
     const today = startOfToday();

@@ -1,11 +1,13 @@
 <div class="events-container">
   <div class="card-header col-md-10">
     <h2>
-      &#127869 This Week
+      This Week <h3>{{this.date}}</h3>
     </h2>
+  <button id="logout">Logout</button>
+  
   </div>
   <div>
-  <form action="/users/submit" method="POST">
+  <form action="/submit" method="POST">
     <input type="text" name="eventName" />
     <input type="date" name="date" />
     <button type="submit">Submit</button>
@@ -29,3 +31,4 @@
     </div>
   {{/each}}
 </div>
+<script src="../js/logout.js"></script>

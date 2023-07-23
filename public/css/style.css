@@ -32,7 +32,6 @@ form {
 .eventCard {
   border: 2px solid #FFA500;
 }
-
 .container {
   width: 70%;
   margin: 0 auto;
@@ -43,8 +42,11 @@ form {
 h1 {
   font-size: 24px;
   margin-bottom: 20px;
+font-family: sans-serif;
 }
-
+h2 {
+  font-family: sans-serif;
+}
 .login-form {
   margin-top: 20px;
 }
@@ -59,6 +61,7 @@ label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
+  font-family: sans-serif;
 }
 
 input[name="username"],
@@ -109,34 +112,4 @@ a:hover {
   text-decoration: underline;
 }
 
-.chart {
-    width: 100%;
-    border-collapse: collapse;
-   border-radius: 2px, red, solid;
-  }
-  
-  .chart th,
-  .chart td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .chart th {
-    background-color: #f2f2f2;
-  }
-  
-  .chart td:first-child {
-    font-weight: bold;
-    width: 100px;
-  }
-  
-  .chart td:not(:first-child):hover {
-    background-color: #eaf2f8;
-  }
-  
-  .chart td:not(:first-child):empty::before {
-    content: "-";
-    color: #999;
-  }
-  
+

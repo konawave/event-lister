@@ -19,7 +19,8 @@ const usersdata = [
     }
 ];
 
-const seedUsers = () => Users.bulkCreate(usersdata);
+const seedUsers = () => Users.bulkCreate(usersdata, {individualHooks:true});
+//running before create on each user rather than bulk processing
 
 module.exports = {
     seedUsers

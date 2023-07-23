@@ -3,22 +3,22 @@ const { Events } = require('../models');
 const eventsdata = [
     {
         name: "Nick",
-        eventName: "Soccer Practice",
+        eventName: "Recailbrating the TARDIS",
         date: "2023-07-20",
     },
     {
         name: "Ben",
-        eventName: "Tuba lessons",
+        eventName: "Beaming up Group 2's presentation",
         date: "2023-07-20",
     },
     {
         name: "Brandon",
-        eventName: "AC/DC Concert",
+        eventName: "Walking to Mordor",
         date: "2023-07-22",
     },
     {
         name: "Nicco",
-        eventName: "Star Wars Movie Premiere",
+        eventName: "Infiltrating the Death Star",
         date: "2023-07-21",
     }
 ];

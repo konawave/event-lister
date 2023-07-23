@@ -56,14 +56,14 @@ router.post('/submit', async (req, res) => {
 
 // Login
 router.post('/login', async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   try {
     const calUserData = await Users.findOne({
       where: {
         username: req.body.username,
       },
     });
-    console.log(calUserData)
+    // console.log(calUserData)
 
     if (!calUserData) {
       res
@@ -114,7 +114,7 @@ router.post('/logout', (req, res) => {
 router.post('/signup', async (req, res) => {
   try {
     //create a user
-    console.log(req.body)
+    // console.log(req.body)
     const newUser = await Users.create({
       username: req.body.username,
       password: req.body.password,
@@ -131,7 +131,7 @@ router.get('/schedule', async (req, res) => {
   // if (!res.session) {
   //   res.redirect('/homepage')res
   // }
-  console.log(req.session)
+  // console.log(req.session)
   if (req.session.loggedIn == false || !req.session.userId) {
     res.redirect('/homepage')
     return

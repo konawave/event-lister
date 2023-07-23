@@ -8,7 +8,7 @@
   </div>
   <div>
   <form action="/submit" method="POST">
-    <input type="text" name="eventName" />
+    <input type="text" name="eventName" placeholder="Input your event name here!" />
     <input type="date" name="date" />
     <button type="submit">Submit</button>
   </form>
@@ -21,7 +21,7 @@
       {{#if events.length}}
         {{#each events}}
           <p class="eventCard">
-            <p>{{name}}</p>
+            <p>{{name}}
             {{eventName}}
           </p>
         {{/each}}

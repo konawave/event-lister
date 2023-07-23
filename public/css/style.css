@@ -1,20 +1,39 @@
+* {
+  font-family: sans-serif;
+  /* border: 2px solid black; */
+}
+
+p {
+  text-align: center;
+}
+
+.card-header.col-md-10 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .date.col-md-5 {
- font-size: 25px;
- font-weight: bolder;
-    font-family: sans-serif;
+  background-color: #4caf50;
+  border-radius: 25px;
+  width: 50%;
+  margin: auto;
+  color: white;
+  font-weight: bold;
+  display: flexbox;
+  justify-content: space-around 2px;
+  border: solid black 2px;
 }
 
 .eventCard {
- 
-font-family: sans-serif;
-}
-.evenCard:hover {
-  font-size: xx-large;
-  color: crimson;
-  background-color: black;
+  border: 2px solid #FFA500;
 }
 .container {
-  max-width: 400px;
+  width: 70%;
   margin: 0 auto;
   padding: 20px;
   text-align: center;
@@ -34,7 +53,8 @@ h2 {
 
 .form-group {
   margin-bottom: 10px;
-
+  width: 50%;
+  display: flexbox;
 }
 
 label {
@@ -44,14 +64,23 @@ label {
   font-family: sans-serif;
 }
 
-
-
-
-input {
+input[name="username"],
+input[name="password"],
+input[id="username-signup"],
+input[id="password-signup"] {
   width: 50%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  text-align: center;
+}
+
+input[name="eventName"] {
+  width: 30%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
 }
 
 button[type="submit"] {
@@ -61,10 +90,13 @@ button[type="submit"] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  align-self: center;
 }
 
 button[type="submit"]:hover {
   background-color: #45a049;
+  margin: auto;
+  
 }
 
 p {

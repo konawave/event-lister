@@ -3,7 +3,7 @@ const { Users, Events } = require('../models');
 const { Op } = require("sequelize");
 const { startOfToday, endOfDay, addDays, format } = require("date-fns");
 
-router.get('/*', async (req, res) => {
+router.get('/homepage', async (req, res) => {
   try {
     res.render('homepage');
     console.log('Success directing to homepage!');
@@ -42,7 +42,7 @@ router.post('/submit', async (req, res) => {
     const { eventName, date } = req.body; // Assuming you've set the appropriate name attributes on the input fields
 
     // Create a new record in the database using Sequelize
-    console.log(req.session.username);
+    console.log(userId);
     await Events.create({
       eventName,
       date,

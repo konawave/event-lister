@@ -96,17 +96,14 @@ router.post('/login', async (req, res) => {
 
 // Logout
 router.post('/logout', (req, res) => {
-  try {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
       res.status(204).end();
     });
   } else {
     res.status(404).end();
-  }} catch (err) {
-    console.log(err);
-    res.status(500).json(err)
-}});
+  }
+});
 // if not validate(username)
 // return 400 username issue
 // if not validate(password)
@@ -118,17 +115,14 @@ router.post('/signup', async (req, res) => {
   try {
     //create a user
     console.log(req.body)
-    await Users.create({
+    const newUser = await Users.create({
       username: req.body.username,
       password: req.body.password,
     });
     // if()
-    res.redirect('/homepage')
+
   }
-  catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-    res.redirect('/homepage')
+  catch {
 
   }
 });

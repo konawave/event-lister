@@ -3,7 +3,7 @@ const { Users, Events } = require('../models');
 const { Op } = require("sequelize");
 const { startOfToday, endOfDay, addDays, format } = require("date-fns");
 
-router.get('/homepage', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     res.render('homepage');
     console.log('Success directing to homepage!');

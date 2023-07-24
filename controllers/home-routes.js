@@ -3,7 +3,7 @@ const { Users, Events } = require('../models');
 const { Op } = require("sequelize");
 const { startOfToday, endOfDay, addDays, format } = require("date-fns");
 
-router.get('/homepage', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     res.render('homepage');
     console.log('Success directing to homepage!');
@@ -50,7 +50,7 @@ router.post('/submit', async (req, res) => {
     res.redirect('/schedule')// Redirect to a success page after successful submission
   } catch (error) {
     console.error(error);
-    res.redirect('/login')// Redirect to an error page if an error occurs
+    res.redirect('/schedule')// Redirect to an error page if an error occurs
   }
 });
 
@@ -130,14 +130,12 @@ router.post('/signup', async (req, res) => {
     res.status(500).json({ message: 'Failed to create user.' });
   }
 });
+
 router.get('/schedule', async (req, res) => {
-  //check the session
-  // if (!res.session) {
-  //   res.redirect('/homepage')res
-  // }
+
   console.log(req.session)
   if (req.session.loggedIn == false || !req.session.userId) {
-    res.redirect('/homepage')
+    res.redirect('/')
     return
   }
   //if not a session send to login page

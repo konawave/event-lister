@@ -50,7 +50,7 @@ router.post('/submit', async (req, res) => {
     res.redirect('/schedule')// Redirect to a success page after successful submission
   } catch (error) {
     console.error(error);
-    res.redirect('/login')// Redirect to an error page if an error occurs
+    res.redirect('/schedule')// Redirect to an error page if an error occurs
   }
 });
 
@@ -128,7 +128,6 @@ router.post('/signup', async (req, res) => {
     // If an error occurs during user creation, handle the error here.
     console.error(error);
     res.status(500).json({ message: 'Failed to create user.' });
-    alert("Password too short! Must be 8 characters or more.");
   }
 });
 

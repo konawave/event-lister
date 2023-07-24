@@ -131,13 +131,10 @@ router.post('/signup', async (req, res) => {
   }
 });
 router.get('/schedule', async (req, res) => {
-  //check the session
-  // if (!res.session) {
-  //   res.redirect('/homepage')res
-  // }
+
   console.log(req.session)
   if (req.session.loggedIn == false || !req.session.userId) {
-    res.redirect('/homepage')
+    res.redirect('/')
     return
   }
   //if not a session send to login page

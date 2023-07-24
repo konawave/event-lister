@@ -67,7 +67,7 @@ router.post('/login', async (req, res) => {
 
     if (!calUserData) {
       res
-        .status(401)
+        .status(400)
         .json({ message: 'Incorrect Username or password. Please try again!' });
       return;
     }
@@ -76,7 +76,7 @@ router.post('/login', async (req, res) => {
 
     if (!validPassword) {
       res
-        .status(402)
+        .status(400)
         .json({ message: 'Incorrect User name or password. Please try again!' });
       return;
     }
@@ -128,8 +128,10 @@ router.post('/signup', async (req, res) => {
     // If an error occurs during user creation, handle the error here.
     console.error(error);
     res.status(500).json({ message: 'Failed to create user.' });
+    alert("Password too short! Must be 8 characters or more.");
   }
 });
+
 router.get('/schedule', async (req, res) => {
 
   console.log(req.session)

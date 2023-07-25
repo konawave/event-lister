@@ -1,25 +1,29 @@
-# event-lister
+# Event Lister
 
 ## Description
-
-    We made this Event Lister so that a family could keep up with each others busy lives and schedules.
+* Event Lister is an application used to help families keep track of their weekly events!
 
 ## Installation
+* npm i
 
-    This program uses mysql2, bcrypt, sequilize, date-fns, dotenv,
-    express, and handlebars,.... please install accordingly
+## Technologies
+* JavaScript
+* CSS
+* HTML
+* Handlebars
+* MySQL
+* Sequelize
+* Date-fns API
+* Heroku  
 
 ## Usage
-
-    This code is used to keep track of a busy familys(or bootcamp students) schedule and plan accordingly.
+* To use this application, simply create a user by entering a username and a password that is no shorter than 8 characters. Then, use those credentials to log in. Once logged in, you are able to add events to the weekly calendar.
 
 ## License
-
-    MIT
+* MIT
 
 ## Credits
-
-    Nick- Database
-    Nicco- Routes
-    Ben- CSS
-    Brandon- Random stuff 
+* Nick- Database/Rendering
+* Nicco- Routes/Logins
+* Ben- Handlebars/Views/CSS
+* Brandon- CSS/Debugging

@@ -3,6 +3,14 @@
   /* border: 2px solid black; */
 }
 
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
 p {
   text-align: center;
 }
@@ -15,6 +23,10 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.events-container {
+  height: 100%;
 }
 
 .date.col-md-5 {
